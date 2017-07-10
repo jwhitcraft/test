@@ -1,3 +1,3 @@
 ## Testing
 
-sugarcrm/{tests/*,}/clients/base/views/filter-actions/**    @glr
+sugarcrm/clients/base/views/filter-actions/**    @glr
