@@ -1,6 +1,5 @@
-def isStaging = (env.BRANCH_NAME == "master")
-def isProduction = (isRelease(env.tagName) != null)
-
+def isStaging = (env.BRANCH_NAME == "master" && env.TAG_NAME == null)
+def isProduction = (isReleaseTag(env.TAG_NAME) != null)
 
 node('bazel') {
     properties([disableConcurrentBuilds()])
@@ -13,7 +12,7 @@ node('bazel') {
 }
 
 @NonCPS
-def isRelease(tagName) {
+def isReleaseTag(tagName) {
   def matcher = tagName =~ 'release-(.*)'
   matcher ? matcher[0][1] : null
 }
