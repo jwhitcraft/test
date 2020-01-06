@@ -8,5 +8,6 @@ node('bazel') {
     stage('scm') {
         print isStaging
         print isProduction
+        sh 'printenv'
     }
 }
