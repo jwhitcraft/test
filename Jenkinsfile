@@ -1,5 +1,6 @@
 def isStaging = (env.BRANCH_NAME == "master")
-def isProduction = (env.TAG_NAME =~ /release-*/)
+def tagRegex = /release-+/
+def isProduction = (env.TAG_NAME =~ tagRegex)
 
 
 node('bazel') {
