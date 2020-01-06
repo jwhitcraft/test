@@ -1,6 +1,5 @@
 def isStaging = (env.BRANCH_NAME == "master")
-def tagRegex = /release-+/
-def isProduction = (env.TAG_NAME =~ tagRegex)
+def isProduction = (isRelease(env.tagName) != null)
 
 
 node('bazel') {
@@ -11,4 +10,10 @@ node('bazel') {
         print isProduction
         sh 'printenv'
     }
+}
+
+@NonCPS
+def isRelease(tagName) {
+  def matcher = tagName =~ 'release-(.*)'
+  matcher ? matcher[0][1] : null
 }
